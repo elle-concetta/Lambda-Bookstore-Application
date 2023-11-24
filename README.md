@@ -88,6 +88,13 @@ Get books by rating with GET API method:
     "rating": "4"
 }
 ```
+Delete book details with DELETE API method:
+```console
+{
+ "pathParameters": {
+    "Id": ""
+}
+```
 Update price of books under publisher by discount with PUT API method:
 ```console
 {
