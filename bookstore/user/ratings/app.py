@@ -22,7 +22,6 @@ def retrieve_books_by_rating(rating):
             # Find all books that match the given rating
             books_cursor = collection.find({"rating": rating})
 
-            # Iterate over the cursor and append book details to the result list
             for book in books_cursor:
                 result.append({
                     "title": book["title"],
@@ -31,7 +30,6 @@ def retrieve_books_by_rating(rating):
 
                 })
 
-            # If no books are found for the given genre, return an error message
             if not result:
                 return {"error": "No books found for the given rating."}
 
