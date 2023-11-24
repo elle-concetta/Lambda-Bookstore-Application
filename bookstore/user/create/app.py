@@ -22,7 +22,7 @@ def lambda_handler(event, context):
         # Connect to the database
         mongo = db.MongoDBConnection()
         with mongo:
-            database = mongo.connection['myDB']
+            database = mongo.connection['dbmodel']
             collection = database['Books']
 
             # Create a new book entry
