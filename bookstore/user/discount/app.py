@@ -1,5 +1,4 @@
 import ujson
-
 from .utils import db
 
 
@@ -10,28 +9,16 @@ def lambda_handler(event, context):
         publisher = body.get('publisher')
         discount = body.get('discount')
 
-        # Convert discount to a numeric type if it's a string
-        if isinstance(discount, str):
-            try:
-                discount = float(discount)
-            except ValueError:
-                return {
-                    "statusCode": 400,
-                    "body": ujson.dumps({
-                        "message": "Invalid discount value"
-                    })
-                }
-
-        # Validate input
-        if not publisher or not isinstance(discount, (int, float)):
+        # Validate and convert discount
+        if discount is None or not discount.replace('.', '', 1).isdigit():
             return {
                 "statusCode": 400,
                 "body": ujson.dumps({
-                    "message": "Invalid publisher or discount"
+                    "message": "Invalid discount value"
                 })
             }
-
-        if not (0 <= discount <= 100):
+        discount = float(discount)
+        if discount < 0 or discount > 100:
             return {
                 "statusCode": 400,
                 "body": ujson.dumps({
@@ -48,20 +35,24 @@ def lambda_handler(event, context):
             # Find books by the publisher
             books = collection.find({"publisher": publisher})
 
+            # Initialize a counter for updated books
+            updated_count = 0
+
             # Update each book's price
             for book in books:
-                if 'price' in book and book['price'].isnumeric():
+                if 'price' in book and book['price'].replace('.', '', 1).isdigit():
                     new_price = float(book['price']) * (100 - discount) / 100
                     collection.update_one(
                         {"_id": book['_id']},
-                        {"$set": {"price": str(new_price)}}
+                        {"$set": {"price": f"{new_price:.2f}"}}
                     )
+                    updated_count += 1
 
             return {
                 "statusCode": 200,
                 "body": ujson.dumps({
-                    "message": "Prices updated successfully"
-                    # Additional response details if needed
+                    "message": "Prices updated successfully",
+                    "updated_count": updated_count
                 })
             }
 
