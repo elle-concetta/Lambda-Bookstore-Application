@@ -42,7 +42,7 @@ Resources:
         BookstoreBestsellersGetAPI:
           Type: Api
           Properties:
-            Path: '/user'
+            Path: '/user/{title}'
             Method: GET
             Auth:
               Authorizer: NONE
@@ -59,7 +59,7 @@ Resources:
         BookstoreDiscountPutAPI:
           Type: Api
           Properties:
-            Path: '/user/{publisher}'
+            Path: '/user/{price}'
             Method: PUT
             Auth:
               Authorizer: NONE
