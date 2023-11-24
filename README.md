@@ -97,11 +97,8 @@ Delete book details with DELETE API method:
 ```
 Update price of books under publisher by discount with PUT API method:
 ```console
-{
-  "body": "{\"publisher\": \"Mariner Books\", \"discount\": \"10\"}",
-  "pathParameters": {
-    "price": "27.99"
-  }
+  {
+  "body": "{\"publisher\": \"Mariner Books\", \"discount\": \"5\"}"
 }
 ```
 
