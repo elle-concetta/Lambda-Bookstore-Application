@@ -59,7 +59,7 @@ Resources:
         BookstoreDiscountPutAPI:
           Type: Api
           Properties:
-            Path: '/user/{price}'
+            Path: '/user'
             Method: PUT
             Auth:
               Authorizer: NONE
