@@ -64,6 +64,23 @@ Resources:
             Auth:
               Authorizer: NONE
 
+    BookstoreUserDelete:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: delete.app.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        BookstoreDeleteAPI:
+          Type: Api
+          Properties:
+            Path: '/user/{Id}'
+            Method: DELETE
+            Auth:
+              Authorizer: NONE
+
   BookstoreUserGenre:
     Type: AWS::Serverless::Function
     Properties:
