@@ -1,0 +1,115 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  BooksFunction
+
+  Lambda Bookstore Function API
+
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 2048
+
+Resources:
+  MyApi:
+    Type: 'AWS::Serverless::Api'
+    Properties:
+      StageName: Prod
+      Auth:
+        DefaultAuthorizer: JWTCustomAuthorizer
+        Authorizers:
+          JWTCustomAuthorizer:
+            FunctionArn: !GetAtt JWTAuthFunction.Arn
+
+  JWTAuthFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: authorizer.app.lambda_handler
+      Runtime: python3.11
+
+  BookstoreUserCreate:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: create.app.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        BookstoreCreatePostAPI:
+          Type: Api
+          Properties:
+            Path: '/user'
+            Method: POST
+            Auth:
+              Authorizer: NONE
+
+  BookstoreUserBestsellers:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: bestsellers.app.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        BookstoreBestsellersGetAPI:
+          Type: Api
+          Properties:
+            Path: '/user'
+            Method: GET
+            Auth:
+              Authorizer: NONE
+
+  BookstoreUserDiscount:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: discount.app.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        BookstoreDiscountPutAPI:
+          Type: Api
+          Properties:
+            Path: '/user'
+            Method: PUT
+            Auth:
+              Authorizer: NONE
+
+  BookstoreUserGenre:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: genre.app.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        BookstoreGenreGetAPI:
+          Type: Api
+          Properties:
+            Path: '/user/{genre}'
+            Method: GET
+            Auth:
+              Authorizer: NONE
+
+  BookstoreUserRatings:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bookstore/user/
+      Handler: ratings.app.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        BookstoreRatingsGetAPI:
+          Type: Api
+          Properties:
+            Path: '/user/{rating}'
+            Method: GET
+            Auth:
+              Authorizer: NONE
