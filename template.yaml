@@ -12,22 +12,6 @@ Globals:
     MemorySize: 2048
 
 Resources:
-  MyApi:
-    Type: 'AWS::Serverless::Api'
-    Properties:
-      StageName: Prod
-      Auth:
-        DefaultAuthorizer: JWTCustomAuthorizer
-        Authorizers:
-          JWTCustomAuthorizer:
-            FunctionArn: !GetAtt JWTAuthFunction.Arn
-
-  JWTAuthFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      CodeUri: bookstore/user/
-      Handler: authorizer.app.lambda_handler
-      Runtime: python3.11
 
   BookstoreUserCreate:
     Type: AWS::Serverless::Function
@@ -75,7 +59,7 @@ Resources:
         BookstoreDiscountPutAPI:
           Type: Api
           Properties:
-            Path: '/user'
+            Path: '/user/{publisher}'
             Method: PUT
             Auth:
               Authorizer: NONE
