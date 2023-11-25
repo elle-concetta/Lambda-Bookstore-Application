@@ -73,12 +73,14 @@ Get top 10 bestsellers with GET API method:
  "pathParameters": {
     "title": ""
 }
+}
 ```
 Get books by genre with GET API method:
 ```console
 {
  "pathParameters": {
     "genre": "Biography"
+}
 }
 ```
 Get books by rating with GET API method:
@@ -87,12 +89,14 @@ Get books by rating with GET API method:
  "pathParameters": {
     "rating": "4"
 }
+}
 ```
 Delete book details with DELETE API method:
 ```console
 {
  "pathParameters": {
     "Id": ""
+}
 }
 ```
 Update price of books under publisher by discount with PUT API method:
