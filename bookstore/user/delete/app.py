@@ -21,7 +21,7 @@ def lambda_handler(event, context):
             return {
                 "statusCode": 400,
                 "body": ujson.dumps({
-                    "message": "Error ! Invalid ObjectId",
+                    "message": "Error! Invalid book.",
                     "data": None
                 })
             }
@@ -29,7 +29,7 @@ def lambda_handler(event, context):
         return {
             "statusCode": 204,
             "body": ujson.dumps({
-                "message": "Data Deleted !",
+                "message": "Book data deleted!",
                 "data": None
             })
         }
