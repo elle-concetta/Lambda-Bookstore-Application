@@ -1,28 +1,37 @@
 import ujson
-from .utils import db
+from .utils import db, validator
 
 
 def lambda_handler(event, context):
     try:
-        # Load data from the request body
+        # Extract publisher, discount, and price from the request body
         body = ujson.loads(event['body'])
         publisher = body.get('publisher')
         discount = body.get('discount')
+        original_price = body.get('price', 0)
 
-        # Validate and convert discount
-        if discount is None or not discount.replace('.', '', 1).isdigit():
+        # Validate input
+        result = validator.BooksSchema()
+        if not result.validate(body):
             return {
                 "statusCode": 400,
                 "body": ujson.dumps({
-                    "message": "Invalid discount value"
+                    "message": "Invalid input",
+                    "data": None
                 })
             }
-        discount = float(discount)
-        if discount < 0 or discount > 100:
+
+        # Convert discount to a float and original_price to float
+        try:
+            discount = float(discount)
+            original_price = float(original_price)
+            if not 0 <= discount <= 100:
+                raise ValueError
+        except ValueError:
             return {
                 "statusCode": 400,
                 "body": ujson.dumps({
-                    "message": "Discount must be between 0 and 100"
+                    "message": "Invalid numerical values"
                 })
             }
 
@@ -32,35 +41,29 @@ def lambda_handler(event, context):
             database = mongo.connection['dbmodel']
             collection = database['Books']
 
-            # Find books by the publisher
-            books = collection.find({"publisher": publisher})
+            # Update the price of all books by the specified publisher
+            collection.update_many(
+                {"publisher": publisher},
+                {"$set": {"price": {"$multiply": ["$price", (100 - discount) / 100]}}}
+            )
 
-            # Initialize a counter for updated books
-            updated_count = 0
-
-            # Update each book's price
-            for book in books:
-                if 'price' in book and book['price'].replace('.', '', 1).isdigit():
-                    new_price = float(book['price']) * (100 - discount) / 100
-                    collection.update_one(
-                        {"_id": book['_id']},
-                        {"$set": {"price": f"{new_price:.2f}"}}
-                    )
-                    updated_count += 1
+            # Calculate updated price based on the original price and discount
+            updated_price = original_price * (100 - discount) / 100
 
             return {
                 "statusCode": 200,
                 "body": ujson.dumps({
                     "message": "Prices updated successfully",
-                    "updated_count": updated_count
+                    "updated_price": updated_price
                 })
             }
 
-    except Exception as err:
+    except Exception as e:
         return {
-            "statusCode": 400,
+            "statusCode": 500,
             "body": ujson.dumps({
                 "message": "An error occurred",
-                "error": str(err)
+                "error": str(e)
             })
         }
+
