@@ -97,7 +97,6 @@ Delete book details with DELETE API method:
 ```
 Update price of books under publisher by discount with PUT API method:
 ```console
-  {
  {
   "body": "{\"price\": \"23.99\", \"discount\": \"15\"}",
   "pathParameters": {
