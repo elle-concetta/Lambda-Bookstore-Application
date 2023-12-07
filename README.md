@@ -12,6 +12,10 @@ PyCharm AWS Toolkit with SAM CLI to build and deploy serverless Bookstore applic
 
 * [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
 
+### Demo Video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z6kZF5Nx5v4?si=6OSzkF0_yD9D3Ynb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
 ## Deploy Bookstore Application
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
 
