@@ -1,6 +1,8 @@
 # Lambda Bookstore Application
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
+Lambda Bookstore Demo Video: https://www.youtube.com/watch?v=z6kZF5Nx5v4
+
 - bookstore - Code for the application's Lambda function.
 - events - Invocation events that you can use to invoke the function.
 - tests - Unit tests for the application code. 
@@ -11,13 +13,6 @@ The application uses several AWS resources, including Lambda functions and an AP
 PyCharm AWS Toolkit with SAM CLI to build and deploy serverless Bookstore application.
 
 * [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-
-### Demo Video
-[![Lambda Bookstore Application Demo]          // Title
-(https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg)] // Thumbnail
-([https://www.youtube.com/watch?v=Hc79sDi3f0U](https://www.youtube.com/watch?v=z6kZF5Nx5v4) "Lambda Bookstore Application Demo")    // Video Link
-
-
 
 ## Deploy Bookstore Application
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
