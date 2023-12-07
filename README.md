@@ -1,7 +1,7 @@
 # Lambda Bookstore Application
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
-Lambda Bookstore Demo Video: https://www.youtube.com/watch?v=z6kZF5Nx5v4
+`Lambda Bookstore Demo Video:` https://www.youtube.com/watch?v=z6kZF5Nx5v4
 
 - bookstore - Code for the application's Lambda function.
 - events - Invocation events that you can use to invoke the function.
