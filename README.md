@@ -13,7 +13,10 @@ PyCharm AWS Toolkit with SAM CLI to build and deploy serverless Bookstore applic
 * [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
 
 ### Demo Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/z6kZF5Nx5v4?si=6OSzkF0_yD9D3Ynb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![Lambda Bookstore Application Demo]          // Title
+(https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg)] // Thumbnail
+([https://www.youtube.com/watch?v=Hc79sDi3f0U](https://www.youtube.com/watch?v=z6kZF5Nx5v4) "Lambda Bookstore Application Demo")    // Video Link
+
 
 
 ## Deploy Bookstore Application
